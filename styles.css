@@ -1,0 +1,150 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background-attachment: fixed;
+    animation: gradientAnimation 15s ease infinite;
+    background-size: 400% 400%;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+    font-size: 3em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    animation: titleAnimation 2s ease-out;
+}
+
+.gallery {
+    width: 100%;
+    height: calc(100% - 100px);
+    position: relative;
+}
+
+.image-box {
+    position: absolute;
+    overflow: hidden;
+    width: 240px;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: all 0.5s ease;
+    gap: 20px;
+}
+
+.image-box:hover {
+    transform: scale(1.1) rotate(3deg);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+.image {
+    max-height: 100%;
+    width: auto;
+    transition: opacity 0.5s ease;
+    margin: 5px 0;
+}
+
+.image-box:hover .image {
+    opacity: 0;
+}
+
+.image-box::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.image-box:hover::after {
+    opacity: 1;
+}
+
+.image-box[data-hover-image]::after {
+    background-image: var(--hover-image);
+}
+
+.hearts {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    pointer-events: none;
+    z-index: 1000;
+    display: none;
+}
+
+.heart {
+    position: absolute;
+    color: #ff4d4d;
+    font-size: 24px;
+    animation: floatingHeart 3s linear;
+    text-shadow: 0 0 5px rgba(255,255,255,0.8);
+}
+
+.background-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes gradientAnimation {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+@keyframes floatingHeart {
+    0% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-200px) rotate(360deg);
+    }
+}
+
+@keyframes titleAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes backgroundHeartAnimation {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
